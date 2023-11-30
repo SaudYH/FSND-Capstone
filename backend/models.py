@@ -1,7 +1,5 @@
-import os
-from sqlalchemy import Column, String, Integer, create_engine, DATE
+from sqlalchemy import Column, String, Integer, DATE
 from flask_sqlalchemy import SQLAlchemy
-import json
 from flask_migrate import Migrate
 
 database_name = "agency"
