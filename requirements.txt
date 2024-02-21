@@ -1,81 +1,105 @@
 alembic==1.12.1
+amqp==5.2.0
 appdirs==1.4.4
-appnope==0.1.3
+appnope @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/appnope_1699303798458/work
 asttokens==2.2.1
-backcall==0.2.0
-beautifulsoup4==4.12.2
+auth==0.5.3
+Authlib==1.3.0
+backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
+beautifulsoup4 @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/beautifulsoup4-split_1699282613795/work
+billiard==4.2.0
 blinker==1.7.0
-certifi==2023.7.22
-charset-normalizer==3.2.0
-click==8.1.7
+Brotli @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/brotli-split_1699237319520/work
+celery==5.3.6
+certifi @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_02sk98_3w5/croot/certifi_1696279385184/work/certifi
+cffi @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_b4nang6w_y/croot/cffi_1700254307954/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+click @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/click_1699237822453/work
+click-didyoumean==0.3.0
+click-plugins==1.1.1
+click-repl==0.3.0
 comm==0.1.4
+cryptography @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/cryptography_1699238918970/work
 debugpy==1.6.7.post1
-decorator==5.1.1
+decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
+dnspython==2.5.0
+ecdsa==0.18.0
 et-xmlfile==1.1.0
+eventlet==0.35.0
 executing==1.2.0
+falcon==3.1.3
 Flask==3.0.0
-Flask-Autodoc==0.1.2
 Flask-Cors==4.0.0
-Flask-Ext==0.1
 Flask-Migrate==4.0.5
 Flask-SQLAlchemy==3.1.1
 flask-swagger==0.2.14
+flask-unittest==0.1.3
+flasker==0.1.45
+flower==2.0.1
 frozendict==2.3.8
-html5lib==1.1
-idna==3.4
+greenlet==3.0.3
+gunicorn==21.2.0
+html5lib @ file:///Users/ktietz/demo/mc3/conda-bld/html5lib_1629144453894/work
+humanize==4.9.0
+idna @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/idna_1699237644810/work
+iniconfig==2.0.0
 ipykernel==6.25.1
 ipython==8.14.0
 itsdangerous==2.1.2
 jedi==0.19.0
-Jinja2==3.1.2
+Jinja2 @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/jinja2_1699239114434/work
 jupyter_client==8.3.0
 jupyter_core==5.3.1
-lxml==4.9.3
+kombu==5.3.5
+lxml @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/lxml_1699242309551/work
 Mako==1.3.0
-MarkupSafe==2.1.3
-matplotlib-inline==0.1.6
+MarkupSafe @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/markupsafe_1699238356177/work
+matplotlib-inline @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/matplotlib-inline_1699242375920/work
+mongoengine==0.27.0
 multitasking==0.0.11
 nest-asyncio==1.5.7
 numpy==1.26.2
 openpyxl==3.1.2
-packaging==23.1
+packaging @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/packaging_1699237023876/work
 pandas==2.1.3
-parso==0.8.3
-pexpect==4.8.0
-pickleshare==0.7.5
+parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
+pexpect @ file:///tmp/build/80754af9/pexpect_1605563209008/work
+pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
 platformdirs==3.10.0
+pluggy==1.4.0
+prometheus-client==0.19.0
 prompt-toolkit==3.0.39
 psutil==5.9.5
-psycopg2==2.9.9
-psycopg2-binary==2.9.9
-ptyprocess==0.7.0
+psycopg2 @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/psycopg2_1699248273369/work
+ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
 pure-eval==0.2.2
+pyasn1==0.5.1
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
 Pygments==2.16.1
-PyQt3D==5.15.6
-PyQt3D-Qt5==5.15.11
-PyQt5==5.15.10
-PyQt5-Qt5==5.15.11
-PyQt5-sip==12.13.0
-PyQtChart==5.15.6
-PyQtDataVisualization==5.15.5
-PyQtNetworkAuth==5.15.5
-PyQtPurchasing==5.15.5
-PyQtWebEngine==5.15.6
-python-dateutil==2.8.2
+pymongo==4.6.1
+pyOpenSSL @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/pyopenssl_1699241567078/work
+PySocks @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/pysocks_1699237568675/work
+pytest==8.0.0
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+python-dotenv==1.0.1
+python-jose==3.3.0
 pytz==2023.3
 PyYAML==6.0.1
 pyzmq==25.1.1
-requests==2.31.0
-six==1.16.0
-soupsieve==2.4.1
+requests @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/requests_1699238126620/work
+rsa==4.9
+setuptools==69.0.2
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+soupsieve @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/soupsieve_1699282494776/work
 SQLAlchemy==2.0.23
 stack-data==0.6.2
-tornado==6.3.3
-traitlets==5.9.0
+tornado @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/tornado_1699243541634/work
+traitlets @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/traitlets_1699282007293/work
 typing_extensions==4.8.0
 tzdata==2023.3
-urllib3==2.0.4
+urllib3 @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/urllib3_1699237745193/work
+vine==5.1.0
 wcwidth==0.2.6
-webencodings==0.5.1
+webencodings @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/webencodings_1699243630039/work
 Werkzeug==3.0.1
-yfinance==0.2.28
+wheel==0.41.2
