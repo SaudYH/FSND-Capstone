@@ -1,5 +1,6 @@
 import unittest
 import json
+from wsgiref import headers
 import requests
 from models import setup_db
 from app import create_app, db
@@ -61,9 +62,9 @@ class CastingAgencyTestCase(unittest.TestCase):
                 connection.execute(text("ALTER SEQUENCE movies_id_seq RESTART WITH 1;"))
         except Exception as e:
             print(f"Error resetting sequences: {e}")
-        cls.assistant_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlNQVWVPOWJTNHFVZWRTUGlCYUgyWiJ9.eyJpc3MiOiJodHRwczovL2Rldi1sY2Ria2Uyemc1MXUxZXV0LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NWNiMTlmNjIwMTNiY2I4ZDJmZjA4YmYiLCJhdWQiOiJodHRwOi8vMTI3LjAuMC4xOjUwMDAvYWN0b3JzIiwiaWF0IjoxNzA4NTA1OTM4LCJleHAiOjE3MDg1OTIzMzgsImF6cCI6ImFSMGo4S0p2M0swOFl6NU1ka2VzWG1BbGFYaWl6UEZUIiwicGVybWlzc2lvbnMiOlsiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiXX0.dcQjZxVjvECiZSyvc2ECF0a0UEy0jJdkPIQ9UEah5irV3PTWC3Wxsvc0pBPvLwN4ACYCvH-g_7wLkj4JJl1pJhl9KleFhkL0HcUKKhnHXm3ZHqJfigujYJeSvoYMRAqWwhWyqGjc2vOtWZIfsqWpSxLVPlhmZT-MP9kOKh4THOYoDigYn0MvG8GV3XhslelHIxBgFWP21q-DVLUYi_gZDQaIbaZOT3Jc92p_-BdwDA9uzAdpdS0saRXMhsMRzz52AI93DWedrh_5Cg2z4l1VD07t6b_uv_LuTzJqQPZGGlwn7781M8LEAZW69kkMXR_j7aRnnhLB4Pq7T1XVZxBKgg"
-        cls.director_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlNQVWVPOWJTNHFVZWRTUGlCYUgyWiJ9.eyJpc3MiOiJodHRwczovL2Rldi1sY2Ria2Uyemc1MXUxZXV0LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NWNiMWEzOTA0ZjY2ZGM2OGUxZDNkNzgiLCJhdWQiOiJodHRwOi8vMTI3LjAuMC4xOjUwMDAvYWN0b3JzIiwiaWF0IjoxNzA4NTA1OTAyLCJleHAiOjE3MDg1OTIzMDIsImF6cCI6ImFSMGo4S0p2M0swOFl6NU1ka2VzWG1BbGFYaWl6UEZUIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.Q-IPAGZsy7U-cbGco4Csee2jvLU94wWnycKJ35-V2uQvSUvtxQAcqVbFc9YAE501TyfZep1bAi1Xk0bBqdl3gDa8JFkG1RuVKn2hFRYjunkbFa8rxmyY-7bBAMNDTwttbdKbzQfa6RLzG0UJBoiulmsz3HbXrGa7sL9xFaokZyRZ5-10BdWJ3egq2x5GslKLGCNVkChyx0GQsz-43KnOfQ0IcpW6KsgCGNWgO7x2E_lN2CSXpZbnUAXSO5QvW1XP1IOuhLvY9ZB1Hm1kbNRNLYP3nwyAXPL7cW2xkeILekLhZs86u0dKcsNTOWAAx0pa2yIQlK5ZcuS1havJTb1JJg"
-        cls.producer_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlNQVWVPOWJTNHFVZWRTUGlCYUgyWiJ9.eyJpc3MiOiJodHRwczovL2Rldi1sY2Ria2Uyemc1MXUxZXV0LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NWNiMWE3NTg4YzljMjYyMzJlYmFiYTMiLCJhdWQiOiJodHRwOi8vMTI3LjAuMC4xOjUwMDAvYWN0b3JzIiwiaWF0IjoxNzA4NTAzMDQ5LCJleHAiOjE3MDg1ODk0NDksImF6cCI6ImFSMGo4S0p2M0swOFl6NU1ka2VzWG1BbGFYaWl6UEZUIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.RiOSOttliQyH_KOFaN7HUC6unDCIAbQltdf0_-Ps6cHvmS45viYW_Mo2UuFA0mZU-hlg7hBJNUnnRuzo3wDtwe79Fn8X9DGIA2EGajdfPDwaG_Gj-7r4M6w7XJblrPt8_PBvjCahqcA6gybSOmrJfaOJC0VqKegDAaeoTVqtc_IOB88ki626aHULSXludwfHBoUP_TtFeOoDoKpPxNwt_8VE9N-r6J0Yku_tVeE2JtaerPRXRhewT5yuv10yYfC-SHqKQU8iJwdrm1tZwEUHpUAkKkJNypkMr6ZryC_Bh0pR2WL31fcInDusQKwB-lm6DW3kaOm9HBgw-w_OWNWjnQ"
+        cls.assistant_token = ""
+        cls.director_token = ""
+        cls.producer_token = ""
 
     @classmethod
     def tearDownClass(cls):
@@ -245,7 +246,7 @@ class CastingAgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message'], "unprocessable")
+        self.assertEqual(data['message'], "Unprocessable")
     
     def test_14_422_if_movie_creation_fails(self):
         headers = {"Authorization": f"Bearer {self.producer_token}"}
@@ -254,62 +255,107 @@ class CastingAgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message'], "unprocessable")
+        self.assertEqual(data['message'], "Unprocessable")
 
-    def test_15_401_if_actor_deletion_fails(self):
+    def test_15_403_if_actor_deletion_fails(self):
         headers = {"Authorization": f"Bearer {self.assistant_token}"}
         res = self.client.delete('/actors/1', headers=headers)
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message']['code'], "unauthorized")
+        self.assertEqual(data['message']['code'], "Forbidden")
 
-    def test_16_401_if_movie_deletion_fails(self):
+    def test_16_403_if_movie_deletion_fails(self):
         headers = {"Authorization": f"Bearer {self.director_token}"}
         res = self.client.delete('/movies/1', headers=headers)
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message']['code'], "unauthorized")
+        self.assertEqual(data['message']['code'], "Forbidden")
 
-    def test_17_401_if_actor_creation_fails(self):
+    def test_17_403_if_actor_creation_fails(self):
         headers = {"Authorization": f"Bearer {self.assistant_token}"}
         res = self.client.delete('/actors/1', headers=headers)
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message']['code'], "unauthorized")
+        self.assertEqual(data['message']['code'], "Forbidden")
 
-    def test_18_401_if_movie_creation_fails(self):
+    def test_18_403_if_movie_creation_fails(self):
         headers = {"Authorization": f"Bearer {self.director_token}"}
         res = self.client.delete('/movies/1', headers=headers)
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message']['code'], "unauthorized")
+        self.assertEqual(data['message']['code'], "Forbidden")
 
-    def test_19_401_if_actor_update_fails(self):
+    def test_19_403_if_actor_update_fails(self):
         headers = {"Authorization": f"Bearer {self.assistant_token}"}
         res = self.client.delete('/actors/1', headers=headers)
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message']['code'], "unauthorized")
+        self.assertEqual(data['message']['code'], "Forbidden")
 
-    def test_20_401_if_movie_update_fails(self):
+    def test_20_403_if_movie_update_fails(self):
         headers = {"Authorization": f"Bearer {self.assistant_token}"}
         res = self.client.delete('/movies/1', headers=headers)
         data = json.loads(res.data)
 
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message']['code'], "Forbidden")
+
+    def test_21_404_if_actor_not_found(self):
+        headers ={"Authorization": f"Bearer {self.director_token}"}
+        res = self.client.patch('/actors/100', json={"name": "Steve Austen"}, headers=headers)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], "Resource Not Found")
+
+    def test_22_404_if_movie_not_found(self):
+        headers ={"Authorization": f"Bearer {self.producer_token}"}
+        res = self.client.patch('/movies/100', json={"title": "The Matrix"}, headers=headers)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], "Resource Not Found")
+
+    def test_23_405_if_actor_creation_not_allowed(self):
+        headers = {"Authorization": f"Bearer {self.assistant_token}"}
+        res = self.client.post('/actors/1', json=self.new_actor, headers=headers)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 405)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], "Method Not Allowed")
+
+    def test_24_401_if_no_auth_header(self):
+        headers = {}
+        res = self.client.get('/actors', headers=headers)
+        data = json.loads(res.data)
+
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message']['code'], "unauthorized")
-    
+        self.assertEqual(data['message']['code'], "authorization_header_missing")
+
+    def test_25_401_if_no_bareer_token(self):
+        headers ={"Authorization": f"{self.assistant_token}"}
+        res = self.client.get('/actors', headers=headers)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 401)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message']['code'], "invalid_header")
+
 if __name__ == "__main__":
     unittest.main()
         
